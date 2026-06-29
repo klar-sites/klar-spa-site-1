@@ -135,5 +135,5 @@ function setActive() {
 
 // Mobile menu button
 document.querySelector('.vkn-nav').onclick = function(e) {
-  e.target.nextSibling.style.display = 'block'; 
+  e.target.nextSibling.style.display = 'block';  
 }
