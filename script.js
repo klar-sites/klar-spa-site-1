@@ -136,5 +136,5 @@ function setActive() {
 // Mobile menu button
 document.querySelector('.vkn-burger').onclick = function(e) {
   console.log(e.target)
-  e.target.nextSibling.style.display = 'block';
+  document.querySelector('.vkn-nav').style.display = 'block';
 }
