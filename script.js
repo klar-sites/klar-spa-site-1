@@ -121,7 +121,7 @@ try {
     "",
     location.pathname + location.search
   );
-  console.log('It works in prod :)')
+  // console.log('It works in prod :)');
 } catch (error) {
   // console.error(error);
 }
