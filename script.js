@@ -1,15 +1,29 @@
 history.scrollRestoration = "manual";
 
+const cache = new Map();
+
+async function fetchPage(path) {
+  if (cache.has(path)) {
+    return cache.get(path);
+  }
+
+  const promise = fetch(path).then(async (response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+
+    return response.text();
+  });
+
+  cache.set(path, promise);
+
+  return promise;
+}
+
 async function go(path, push = true, state = {}) {
   const app = document.querySelector("#root");
 
-  const response = await fetch(path);
-
-  if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
-  }
-
-  const html = await response.text();
+  const html = await fetchPage(path);
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
@@ -27,7 +41,6 @@ async function go(path, push = true, state = {}) {
 
   setActive();
 
-  // Optional: move keyboard focus to the new content
   app.focus?.();
 
   if (push) {
@@ -37,6 +50,22 @@ async function go(path, push = true, state = {}) {
     window.scrollTo(0, state.scrollY || 0);
   }
 }
+
+// Prefetch pages when hovering links
+document.addEventListener("pointerenter", (e) => {
+  const a = e.target.closest("a");
+
+  if (
+    !a ||
+    a.origin !== location.origin ||
+    a.target === "_blank" ||
+    a.hasAttribute("download")
+  ) {
+    return;
+  }
+
+  fetchPage(a.pathname + a.search).catch(() => {});
+}, true);
 
 document.addEventListener("click", async (e) => {
   const a = e.target.closest("a");
@@ -58,7 +87,6 @@ document.addEventListener("click", async (e) => {
 
   e.preventDefault();
 
-  // Save current scroll position before leaving the page
   history.replaceState(
     { scrollY: window.scrollY },
     "",
@@ -69,8 +97,6 @@ document.addEventListener("click", async (e) => {
     await go(a.pathname + a.search);
   } catch (err) {
     console.error(err);
-
-    // Fall back to a normal page load
     location.href = a.href;
   }
 });
@@ -79,7 +105,6 @@ window.addEventListener("popstate", (e) => {
   go(location.pathname + location.search, false, e.state || {});
 });
 
-// Initial history state
 history.replaceState(
   { scrollY: window.scrollY },
   "",
@@ -91,5 +116,3 @@ function setActive() {
     a.classList.toggle("active", a.pathname === location.pathname);
   });
 }
-
-// setActive();
