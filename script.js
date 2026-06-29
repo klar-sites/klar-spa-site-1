@@ -1,4 +1,4 @@
-const app = document.querySelector("#root");
+const app = document.querySelector("#vkn-root");
 
 async function go(path, push = true) {
   const file = `${path === "/" ? "/home" : path}`;
@@ -6,7 +6,7 @@ async function go(path, push = true) {
   const text = await fetch(file).then(r => r.text());
 
   const doc = new DOMParser().parseFromString(text, "text/html");
-  const root = doc.querySelector("#root");
+  const root = doc.querySelector("#vkn-root");
 
   app.replaceChildren(...root.children);
 
