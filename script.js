@@ -132,3 +132,8 @@ function setActive() {
     a.classList.toggle("active", a.pathname === location.pathname);
   });
 }
+
+// Mobile menu button
+document.querySelector('.vkn-nav').onclick = function(e) {
+  e.target.nextSibling.style.display = 'block'; 
+}
