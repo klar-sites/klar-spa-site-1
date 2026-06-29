@@ -115,11 +115,16 @@ window.addEventListener("popstate", (e) => {
 });
 
 // Initial history state
-history.replaceState(
-  { scrollY: window.scrollY },
-  "",
-  location.pathname + location.search
-);
+try {
+  history.replaceState( 
+    { scrollY: window.scrollY },
+    "",
+    location.pathname + location.search
+  );
+  console.log('It works in prod :)')
+} catch (error) {
+  // console.error(error);
+}
 
 // Active link highlighting
 function setActive() {
