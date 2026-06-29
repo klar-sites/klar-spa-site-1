@@ -1,7 +1,7 @@
 const app = document.querySelector("#root");
 
 async function go(path, push = true) {
-  const file = `pages${path === "/" ? "/home" : path}.html`;
+  const file = `${path === "/" ? "/home" : path}`;
 
   const text = await fetch(file).then(r => r.text());
 
