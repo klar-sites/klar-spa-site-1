@@ -1,26 +1,36 @@
 const app = document.querySelector("#root");
 
-async function go(path) {
-  const file = `${path === "/" ? "/home" : path}`;
-  console.log('test', await fetch(file).then(r => r.text()));
-  app.innerHTML = await fetch(file).then(r => r.text());
-  history.pushState({}, "", path);
-  // setActive();
+async function go(path, push = true) {
+  const file = `pages${path === "/" ? "/home" : path}.html`;
+
+  const text = await fetch(file).then(r => r.text());
+
+  const doc = new DOMParser().parseFromString(text, "text/html");
+  const root = doc.querySelector("#root");
+
+  app.replaceChildren(...root.children);
+
+  if (push) {
+    history.pushState({}, "", path);
+  }
+
+  setActive();
 }
 
-// function setActive() {
-//   document.querySelectorAll("a").forEach(a =>
-//     a.classList.toggle("active", a.pathname === location.pathname)
-//   );
-// }
+function setActive() {
+  document.querySelectorAll("a").forEach(a =>
+    a.classList.toggle("active", a.pathname === location.pathname)
+  );
+}
 
 document.addEventListener("click", e => {
   const a = e.target.closest("a");
   if (!a || a.origin !== location.origin) return;
+
   e.preventDefault();
   go(a.pathname);
 });
 
-window.addEventListener("popstate", () => go(location.pathname));
+window.addEventListener("popstate", () => go(location.pathname, false));
 
-// go(location.pathname);
+// go(location.pathname, false);
