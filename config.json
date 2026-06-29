@@ -2,7 +2,12 @@
   "pageTypes": [],
   "pages": [
     {
+      "name": "behandlingar.html",
+      "editableElements": ".vkn-cards[]"
+    },
+    {
       "name": "index.html",
+      "editableElements": ".vkn-cards[]",
       "sharedSections": ".vkn-header, .vkn-footer"
     }
   ],
