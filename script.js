@@ -38,12 +38,6 @@ async function go(path, push = true, state = {}) {
   }
 }
 
-function setActive() {
-  document.querySelectorAll("a").forEach((a) => {
-    a.classList.toggle("active", a.pathname === location.pathname);
-  });
-}
-
 document.addEventListener("click", async (e) => {
   const a = e.target.closest("a");
 
