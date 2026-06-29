@@ -133,7 +133,7 @@ function setActive() {
   });
 }
 
-// Mobile menu button
+// Mobile toggle menu button
 document.querySelector('.vkn-burger').onclick = function(e) {
   const nav = document.querySelector('.vkn-nav');
   if (nav.classList.contains('show')) {
