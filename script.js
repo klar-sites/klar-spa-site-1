@@ -136,9 +136,9 @@ function setActive() {
 // Mobile menu button
 document.querySelector('.vkn-burger').onclick = function(e) {
   const nav = document.querySelector('.vkn-nav');
-  if (nav.style.display === 'flex') {
-    document.querySelector('.vkn-nav').style.display = 'none';  
+  if (nav.classList.contains('show')) {
+    document.querySelector('.vkn-nav').classList.remove('show');  
   } else {
-    document.querySelector('.vkn-nav').style.display = 'flex';
+    document.querySelector('.vkn-nav').classList.add('show');  
   }
 }
