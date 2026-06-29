@@ -50,9 +50,7 @@ async function go(path, push = true, state = {}) {
   }
 }
 
-/**
- * Prefetch on hover / pointer enter
- */
+// Prefetch on hover / pointer enter
 document.addEventListener(
   "pointerenter",
   (e) => {
@@ -74,9 +72,7 @@ document.addEventListener(
   true
 );
 
-/**
- * Intercept navigation clicks
- */
+// Intercept navigation clicks
 document.addEventListener("click", async (e) => {
   if (!(e.target instanceof Element)) return;
 
@@ -113,25 +109,19 @@ document.addEventListener("click", async (e) => {
   }
 });
 
-/**
- * Back / forward navigation
- */
+// Back / forward navigation
 window.addEventListener("popstate", (e) => {
   go(location.pathname + location.search, false, e.state || {});
 });
 
-/**
- * Initial history state
- */
+// Initial history state
 history.replaceState(
   { scrollY: window.scrollY },
   "",
   location.pathname + location.search
 );
 
-/**
- * Active link highlighting
- */
+// Active link highlighting
 function setActive() {
   document.querySelectorAll("a").forEach((a) => {
     a.classList.toggle("active", a.pathname === location.pathname);
