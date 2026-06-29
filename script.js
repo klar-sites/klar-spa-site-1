@@ -4,6 +4,7 @@ async function go(path, push = true) {
   const file = `${path === "/" ? "/home" : path}`;
 
   const text = await fetch(file).then(r => r.text());
+  console.log(text)
 
   const doc = new DOMParser().parseFromString(text, "text/html");
   const root = doc.querySelector("#vkn-root");
