@@ -1,5 +1,5 @@
 async function go(path, push = true, state = {}) {
-  const app = document.querySelector("#vkn-root");
+  const app = document.querySelector("#root");
 
   const response = await fetch(path);
   if (!response.ok)
@@ -10,10 +10,10 @@ async function go(path, push = true, state = {}) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
-  const root = doc.getElementById("vkn-root");
+  const root = doc.getElementById("root");
 
   if (!root) {
-    console.error("Couldn't find #vkn-root in fetched page.");
+    console.error("Couldn't find #root in fetched page.");
     console.log(html);
     return;
   }
