@@ -153,7 +153,8 @@ a {
     padding: 18px 4vw 26px;
     gap: 16px;
     border-bottom: 1px solid var(--vkn-border);
-    transform: translateY(-130%);
+    display: none;
+    /* transform: translateY(-130%); */
     transition: transform 0.28s ease;
   }
 
