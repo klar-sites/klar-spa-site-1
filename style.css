@@ -158,6 +158,10 @@ a {
     transition: transform 0.28s ease;
   }
 
+  .vkn-nav.show {
+    display: flex;
+  }
+
   .vkn-nav.vkn-nav--open {
     transform: translateY(0);
   }
