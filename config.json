@@ -1,5 +1,10 @@
 {
   "pageTypes": [],
-  "pages": [],
+  "pages": [
+    {
+      "name": "index.html",
+      "sharedSections": ".vkn-header, .vkn-footer"
+    }
+  ],
   "vocabularies": {}
 }
