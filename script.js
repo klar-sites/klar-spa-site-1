@@ -2,9 +2,7 @@ history.scrollRestoration = "manual";
 
 const cache = new Map();
 
-/**
- * Fetch + cache HTML pages
- */
+// Fetch + cache HTML pages
 async function fetchPage(path) {
   if (cache.has(path)) {
     return cache.get(path);
@@ -21,9 +19,7 @@ async function fetchPage(path) {
   return promise;
 }
 
-/**
- * Navigate
- */
+// Navigate
 async function go(path, push = true, state = {}) {
   const app = document.querySelector("#root");
 
